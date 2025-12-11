@@ -1,10 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
   <meta charset="UTF-8" />
   <title>Happy Birthday 🎂</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <style>
+
+  @font-face {
+    font-family: "Mosseta-Regular";
+    src: url("Mosseta-Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Rosehot";
+    src: url("Rosehot.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Autumn Brush";
+    src: url("Autumn Brush.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Crustaceans-SignatureDEMO-Regular";
+    src: url("Crustaceans-SignatureDEMO-Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Bizantheum";
+    src: url("Bizantheum.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -12,14 +50,16 @@
     }
 
     body {
+      scroll-behavior: smooth;
       min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      font-family: "Rosehot", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
       background: radial-gradient(circle at top, #ffd6e8, #f2f4ff, #ffe8cc);
       color: #333;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     /* ===== OVERLAY + ENVELOPE BUTTON ===== */
@@ -71,7 +111,7 @@
       inset: 18px;
       background: linear-gradient(145deg, #ffe6f0, #ffd0e1);
       border-radius: 18px;
-      box-shadow: 0 18px 40px rgba(255, 179, 203, 0.55);
+      box-shadow: 0 18px 40px rgba(233, 89, 134, 0.6);
       border: 1px solid rgba(255, 170, 204, 0.9);
     }
 
@@ -103,7 +143,7 @@
       position: absolute;
       inset: 18px;
       background: linear-gradient(145deg, #ffb6cf, #ff9eb5);
-      clip-path: polygon(0 0, 100% 0, 50% 60%);
+      clip-path: polygon(0 0, 100% 0, 50% 70%);
       transform-origin: top;
       transform-style: preserve-3d;
       transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
@@ -151,7 +191,6 @@
       z-index: 1;
     }
 
-
     .hero {
       min-height: 0vh;
       display: flex;
@@ -188,118 +227,20 @@
       max-width: 720px;
     }
 
-    /* ===== 3D-ish CAKE ===== */
+    /* ===== 3D CAKE CONTAINER ===== */
 
     .cake-3d {
       position: relative;
-      width: 120px;
-      height: 120px;
-      transform-style: preserve-3d;
-      transform: rotateX(18deg) rotateY(-18deg) translateY(40px) scale(0.9);
+      width: 140px;
+      height: 140px;
       opacity: 0;
+      transform: translateY(20px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
     .cake-3d.show {
       opacity: 1;
-      transform: rotateX(18deg) rotateY(-18deg) translateY(0) scale(1);
-      animation: cakeFloat 4.5s ease-in-out infinite alternate;
-    }
-
-    .cake-layer {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 18px;
-      box-shadow: 0 10px 20px rgba(182, 132, 164, 0.38);
-    }
-
-    .cake-layer.bottom {
-      bottom: 0;
-      width: 120px;
-      height: 40px;
-      background: linear-gradient(180deg, #ffeef6, #ffd3e6);
-      border: 1px solid rgba(232, 155, 197, 0.9);
-    }
-
-    .cake-layer.middle {
-      bottom: 26px;
-      width: 96px;
-      height: 32px;
-      background: linear-gradient(180deg, #fff0f5, #ffc4dd);
-      border: 1px solid rgba(232, 141, 188, 0.9);
-    }
-
-    .cake-layer.top {
-      bottom: 48px;
-      width: 72px;
-      height: 24px;
-      background: linear-gradient(180deg, #ffffff, #ffe6f3);
-      border-radius: 18px 18px 14px 14px;
-      border: 1px solid rgba(234, 160, 203, 0.9);
-    }
-
-    .cake-cream-line {
-      position: absolute;
-      bottom: 34px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 95px;
-      height: 9px;
-      background: repeating-linear-gradient(
-        90deg,
-        #ff8fb8,
-        #ff8fb8 7px,
-        #ffe9f3 7px,
-        #ffe9f3 14px
-      );
-      border-radius: 999px;
-      opacity: 0.96;
-    }
-
-    .cake-candle {
-      position: absolute;
-      bottom: 70px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 10px;
-      height: 30px;
-      background: linear-gradient(180deg, #ffe8f2, #ff8fb8);
-      border-radius: 999px;
-      border: 1px solid rgba(234, 134, 190, 0.9);
-    }
-
-    .candle-flame {
-      position: absolute;
-      top: -16px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 16px;
-      height: 22px;
-      background: radial-gradient(circle at 30% 10%, #ffffff, #ffd36b, #ff9b4b);
-      border-radius: 50%;
-      filter: drop-shadow(0 0 10px rgba(255, 181, 69, 0.95));
-      animation: flameFlicker 0.85s ease-in-out infinite alternate;
-    }
-
-    @keyframes cakeFloat {
-      0% {
-        transform: rotateX(18deg) rotateY(-18deg) translateY(0) scale(1);
-      }
-      100% {
-        transform: rotateX(15deg) rotateY(-14deg) translateY(-6px) scale(1.02);
-      }
-    }
-
-    @keyframes flameFlicker {
-      0% {
-        transform: translateX(-50%) scale(1);
-        opacity: 0.9;
-      }
-      100% {
-        transform: translateX(-50%) scale(1.12);
-        opacity: 1;
-      }
+      transform: translateY(0);
     }
 
     /* ===== CARD (TEXT + PHOTO) ===== */
@@ -308,7 +249,7 @@
       border-radius: 24px;
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(16px);
-      box-shadow: 0 18px 55px rgba(116, 116, 191, 0.22);
+      box-shadow: 0 18px 55px rgba(6, 6, 224, 0.22);
       padding: 1.2rem 1.4rem;
       margin-top: 1.4rem;
       opacity: 0;
@@ -367,6 +308,7 @@
     }
 
     .message {
+      font-family: "Autumn Brush", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
       font-size: 0.98rem;
       line-height: 1.8;
       color: #444;
@@ -522,23 +464,22 @@
     /* 🌸 FLOWER SPRAY (ephemeral) */
 
     .flower-spray {
-        position: fixed;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background-image: url("petals.png");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-color: #dfc4ce;
-        box-shadow: 0 0 10px rgba(255, 143, 184, 0.8);
-        pointer-events: none;
-        z-index: 5;
-        opacity: 0.5;
-        transform: translate(0, 0) scale(0.8);
-        animation: flowerSpray 1.8s ease-out forwards;
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-image: url("petals.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-color: #dfc4ce;
+      box-shadow: 0 0 10px rgba(255, 143, 184, 0.8);
+      pointer-events: none;
+      z-index: 5;
+      opacity: 0.5;
+      transform: translate(0, 0) scale(0.8);
+      animation: flowerSpray 1.8s ease-out forwards;
     }
-
 
     .flower-spray::before,
     .flower-spray::after {
@@ -617,14 +558,6 @@
         padding: 0.3rem 0.7rem;
       }
 
-      .cake-3d {
-        transform: rotateX(18deg) rotateY(-18deg) translateY(30px) scale(0.8);
-      }
-
-      .cake-3d.show {
-        transform: rotateX(18deg) rotateY(-18deg) translateY(0) scale(0.9);
-      }
-
       .card {
         margin-top: 1rem;
         padding: 1.1rem 1rem;
@@ -664,30 +597,28 @@
 </head>
 <body>
 
-  <!-- Background music (replace the src with your own song if you like) -->
-  <audio id="bgm" src="birthday-song.mp3" preload="auto" loop></audio>
-  <audio id="bgmCake" src="birthday-song2.mp3" preload="auto" loop></audio>
-
+  <!-- Background music -->
+  <audio id="bgm" src="b1.m4a" preload="auto" loop></audio>
+  <audio id="bgmCake" src="b2.m4a" preload="auto" loop></audio>
 
   <!-- OPENING OVERLAY WITH ENVELOPE -->
   <div class="overlay" id="overlay">
     <div>
-      <div class="overlay-title">A LITTLE BIRTHDAY SECRET</div>
-      <div class="overlay-subtitle">Tap the letter to open your surprise ✉️</div>
+      <div class="overlay-title">BIRTHDAY SECRET</div>
     </div>
 
     <div class="envelope-wrapper" id="envelope">
       <div class="envelope-back"></div>
       <div class="envelope-paper">
-        <p>To: TO_NAME</p>
-        <p>Open for a birthday wish</p>
+        <p>To: SAM</p>
+        <p>Open Here</p>
       </div>
       <div class="envelope-flap">
         <div class="envelope-seal">♡</div>
       </div>
     </div>
 
-    <div class="overlay-hint">Click the letter to open your birthday card</div>
+    <div class="overlay-hint">Click the letter to open your birthday card ✉️</div>
   </div>
 
   <!-- BACKGROUND BALLOONS -->
@@ -698,20 +629,12 @@
 
   <!-- MAIN CONTENT -->
   <div class="container">
-    <!-- HERO: CAKE only -->
+    <!-- HERO: 3D CAKE -->
     <div class="hero" id="hero">
       <div class="hero-caption">For my favourite person in the world</div>
 
       <div class="hero-row">
-        <div class="cake-3d" id="cake">
-          <div class="cake-layer bottom"></div>
-          <div class="cake-layer middle"></div>
-          <div class="cake-layer top"></div>
-          <div class="cake-cream-line"></div>
-          <div class="cake-candle">
-            <div class="candle-flame"></div>
-          </div>
-        </div>
+        <div class="cake-3d" id="cake3d-container"></div>
       </div>
     </div>
 
@@ -738,7 +661,6 @@
       </div>
 
       <div class="photo-wrapper">
-        <!-- If you have a real photo, replace this div with an <img> and update src -->
         <!--
         <img src="boyfriend.jpg" alt="My favourite photo of you" class="photo" />
         -->
@@ -755,9 +677,12 @@
     </div>
   </div>
 
-  <script>
-    // Typewriter message text
-    const fullMessage = `
+ <script type="module">
+  import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+  import { FBXLoader } from "https://unpkg.com/three@0.160.0/examples/jsm/loaders/FBXLoader.js";
+
+  // Typewriter message text
+  const fullMessage = `
 Dear TO_NAME 💙
 
 Today is another trip you’ve taken around the sun,
@@ -785,123 +710,203 @@ and my little hero. 🎂
 FROM_NAME
 `.trim();
 
-    const typedSpan = document.getElementById("typed");
-    const cursorSpan = document.getElementById("cursor");
-    const hero = document.getElementById("hero");
-    const card = document.getElementById("card");
-    const cake = document.getElementById("cake");
-    const overlay = document.getElementById("overlay");
-    const envelope = document.getElementById("envelope");
-    const bgm = document.getElementById("bgm");
-    const bgmCake = document.getElementById("bgmCake");
+  const typedSpan = document.getElementById("typed");
+  const cursorSpan = document.getElementById("cursor");
+  const hero = document.getElementById("hero");
+  const card = document.getElementById("card");
+  const cakeContainer = document.getElementById("cake3d-container");
+  const overlay = document.getElementById("overlay");
+  const envelope = document.getElementById("envelope");
+  const bgm = document.getElementById("bgm");
+  const bgmCake = document.getElementById("bgmCake");
+  const titleEl = document.querySelector(".title");
 
-    const titleEl = document.querySelector(".title");
-
-    if (titleEl && bgmCake) {
-        titleEl.style.cursor = "pointer"; // little hint it's clickable
-
-        titleEl.addEventListener("click", () => {
-            if (bgmCake.paused) {
-            bgmCake.volume = 0.8;
-            bgm.play().catch(() => {
-                // some browsers block autoplay, but since this is a click, it should be fine
-            });
-            }
-            // if you want toggle (click again to pause), use this instead:
-            if (bgmCake.paused) bgmCake.play(); else bgmCake.pause();
-        });
-    }
-
-
-    let index = 0;
-
-    function typeNextChar() {
-      if (index < fullMessage.length) {
-        const char = fullMessage[index];
-        typedSpan.textContent += char;
-        index++;
-
-        let delay = 38;
-        if (char === "." || char === "!" || char === "?" || char === "\n") {
-          delay = 250;
-        }
-        setTimeout(typeNextChar, delay);
+  // 点击标题，播放/暂停第二首歌
+  if (titleEl && bgmCake) {
+    titleEl.style.cursor = "pointer";
+    titleEl.addEventListener("click", () => {
+      bgmCake.volume = 0.8;
+      if (bgmCake.paused) {
+        bgmCake.play().catch(() => {});
       } else {
-        cursorSpan.style.display = "none";
+        bgmCake.pause();
       }
-    }
-
-    // 🌸 One-time flower spray
-    function launchFlowerSpray() {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-
-      const count = 22;
-      for (let i = 0; i < count; i++) {
-        const flower = document.createElement("div");
-        flower.className = "flower-spray";
-
-        const angle = Math.random() * Math.PI * 2;
-        const distance = 80 + Math.random() * 160;
-        const tx = Math.cos(angle) * distance;
-        const ty = Math.sin(angle) * distance - 40; // slightly upwards
-
-        flower.style.left = centerX + "px";
-        flower.style.top = centerY + "px";
-        flower.style.setProperty("--tx", tx + "px");
-        flower.style.setProperty("--ty", ty + "px");
-        flower.style.animationDelay = (Math.random() * 0.25) + "s";
-
-        document.body.appendChild(flower);
-
-        setTimeout(() => {
-          flower.remove();
-        }, 2000);
-      }
-    }
-
-    // Date display
-    const todaySpan = document.getElementById("today");
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    todaySpan.textContent = `${year}-${month}-${day}`;
-
-    // Handle envelope click -> open animation + show hero + card + music + flower spray
-    envelope.addEventListener("click", () => {
-      if (envelope.classList.contains("open")) return;
-
-      envelope.classList.add("open");
-
-      // Start music (if allowed by the browser)
-      if (bgm) {
-        bgm.volume = 0.8;
-        bgm.play().catch(() => {});
-      }
-
-      // 🌸 launch one-time flower spray
-      setTimeout(() => {
-        launchFlowerSpray();
-      }, 280);
-
-      // Show hero area (cake)
-      setTimeout(() => {
-        hero.classList.add("show");
-        cake.classList.add("show");
-      }, 250);
-
-      // Fade out overlay
-      setTimeout(() => {
-        overlay.classList.add("fade-out");
-      }, 600);
-
-      // Show message card + start typewriter
-      setTimeout(() => {
-        card.classList.add("show");
-        typeNextChar();
-      }, 1100);
     });
-  </script>
+  }
+
+  let index = 0;
+
+  function typeNextChar() {
+    if (index < fullMessage.length) {
+      const char = fullMessage[index];
+      typedSpan.textContent += char;
+      index++;
+
+      let delay = 38;
+      if (char === "." || char === "!" || char === "?" || char === "\n") {
+        delay = 250;
+      }
+      setTimeout(typeNextChar, delay);
+    } else {
+      cursorSpan.style.display = "none";
+    }
+  }
+
+  // 🌸 One-time flower spray
+  function launchFlowerSpray() {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    const count = 22;
+    for (let i = 0; i < count; i++) {
+      const flower = document.createElement("div");
+      flower.className = "flower-spray";
+
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 80 + Math.random() * 160;
+      const tx = Math.cos(angle) * distance;
+      const ty = Math.sin(angle) * distance - 40;
+
+      flower.style.left = centerX + "px";
+      flower.style.top = centerY + "px";
+      flower.style.setProperty("--tx", tx + "px");
+      flower.style.setProperty("--ty", ty + "px");
+      flower.style.animationDelay = (Math.random() * 0.25) + "s";
+
+      document.body.appendChild(flower);
+
+      setTimeout(() => {
+        flower.remove();
+      }, 2000);
+    }
+  }
+
+  // 日期
+  const todaySpan = document.getElementById("today");
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+  todaySpan.textContent = `${year}-${month}-${day}`;
+
+  // 🎂 初始化 3D 蛋糕（使用 ES Module 版 Three + FBXLoader）
+  function init3DCake() {
+    if (!cakeContainer) {
+      console.warn("no cake3d-container element");
+      return;
+    }
+
+    const width = cakeContainer.clientWidth || 140;
+    const height = cakeContainer.clientHeight || 140;
+
+    const scene = new THREE.Scene();
+    scene.background = null;
+
+    const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
+    camera.position.set(0, 1.5, 4);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+    });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(window.devicePixelRatio || 1);
+    cakeContainer.innerHTML = "";
+    cakeContainer.appendChild(renderer.domElement);
+
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    dirLight.position.set(3, 5, 4);
+    scene.add(dirLight);
+
+    const ambient = new THREE.AmbientLight(0xffe0f0, 0.7);
+    scene.add(ambient);
+
+    const loader = new FBXLoader();
+    let cakeModel = null;
+
+    loader.load(
+      "cake.fbx", // ⚠️ 确认文件名和路径
+      (object) => {
+        console.log("FBX loaded");
+        cakeModel = object;
+
+        object.traverse((child) => {
+          if (child.isMesh) {
+            child.castShadow = false;
+            child.receiveShadow = false;
+          }
+        });
+
+        // 先给一个大概的缩放，如果太大/太小可以改
+        object.scale.set(0.01, 0.01, 0.01);
+        object.position.set(0, -0.5, 0);
+        scene.add(object);
+      },
+      undefined,
+      (error) => {
+        console.error("Error loading FBX cake:", error);
+      }
+    );
+
+    function animate() {
+      requestAnimationFrame(animate);
+      if (cakeModel) {
+        cakeModel.rotation.y += 0.01;
+      }
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener("resize", () => {
+      const newWidth = cakeContainer.clientWidth || 140;
+      const newHeight = cakeContainer.clientHeight || 140;
+      renderer.setSize(newWidth, newHeight);
+      camera.aspect = newWidth / newHeight;
+      camera.updateProjectionMatrix();
+    });
+  }
+
+  // 页面加载完就初始化 3D 蛋糕
+  window.addEventListener("load", init3DCake);
+
+  // 信封点击
+  envelope.addEventListener("click", () => {
+    if (envelope.classList.contains("open")) return;
+
+    envelope.classList.add("open");
+
+    // 背景音乐 1
+    if (bgm) {
+      bgm.volume = 0.8;
+      bgm.play().catch(() => {});
+    }
+
+    // 花瓣
+    setTimeout(() => {
+      launchFlowerSpray();
+    }, 280);
+
+    // 显示 hero + 蛋糕容器
+    setTimeout(() => {
+      hero.classList.add("show");
+      if (cakeContainer) {
+        cakeContainer.classList.add("show");
+      }
+    }, 250);
+
+    // 隐藏遮罩
+    setTimeout(() => {
+      overlay.classList.add("fade-out");
+    }, 600);
+
+    // 显示 card + 打字机
+    setTimeout(() => {
+      card.classList.add("show");
+      typeNextChar();
+    }, 1100);
+  });
+</script>
+
 </body>
 </html>
