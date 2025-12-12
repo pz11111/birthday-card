@@ -602,7 +602,7 @@
 
   <!-- Background music（按你自己的文件名改） -->
   <audio id="bgm" src="b1.m4a" preload="auto" loop></audio>
-  <audio id="bgmCake" src="b2.m4a" preload="auto" loop></audio>
+  <audio id="bgmCake" src="b2.m4a" preload="auto"></audio>
 
   <!-- OPENING OVERLAY WITH ENVELOPE -->
   <div class="overlay" id="overlay">
@@ -722,9 +722,9 @@ FROM_NAME
     const titleEl = document.querySelector(".title");
 
     // 点击标题，播放/暂停第二首歌
-    if (titleEl && bgmCake) {
-      titleEl.style.cursor = "pointer";
-      titleEl.addEventListener("click", () => {
+    if (cakeContainer && bgmCake) {
+      cakeContainer.style.cursor = "pointer";
+      cakeContainer.addEventListener("click", () => {
         bgmCake.volume = 0.8;
         if (bgmCake.paused) {
           bgmCake.play().catch(() => {});
