@@ -312,11 +312,13 @@
 
   .message {
     font-family: "Autumn Brush", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    font-size: 0.98rem;
-    line-height: 1.8;
+    text-align: start;
+    text-shadow: #9fd5ff;
+    font-size: 1.2rem;
+    line-height: 1.5;
     color: #444;
     margin-top: 0.5rem;
-    white-space: pre-wrap;
+    white-space: pre-line;
   }
 
   .sign {
@@ -331,57 +333,57 @@
     color: #c1557f;
   }
 
-  .photo-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 320px;
-    margin: 1rem auto 0;
-  }
+/* 外层容器：跟原来类似，但让它尽量占满卡片那一列 */
+.photo-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 1rem auto 0;
+}
 
-  .photo {
-    width: 100%;
-    border-radius: 24px;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
-    border: 6px solid #fff;
-  }
+/* 相框容器：固定比例 + 阴影 + 圆角 */
+.photo-slider {
+  width: 100%;
+  aspect-ratio: 4 / 5;          /* 统一竖屏比例 */
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 18px 45px rgba(255, 87, 241, 0.22);
+  border: 6px solid #fff;
+  background: #000;             /* 加载前的底色 */
+}
 
-  .photo-placeholder {
-    width: 100%;
-    border-radius: 24px;
-    aspect-ratio: 4 / 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: repeating-linear-gradient(
-      135deg,
-      #ffe2ec,
-      #ffe2ec 10px,
-      #f3f3ff 10px,
-      #f3f3ff 20px
-    );
-    color: #b86d8a;
-    font-size: 0.95rem;
-    text-align: center;
-    padding: 1.2rem;
-    border: 3px dashed rgba(255, 153, 187, 0.7);
-  }
+/* 横向滑动条：整条占满相框，高度等于相框高度 */
+.photo-strip {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory; /* 滑到一张自动对齐 */
+  scroll-behavior: smooth;
+}
 
-  .photo-tag {
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #333;
-    color: #fff;
-    font-size: 0.78rem;
-    padding: 0.2rem 0.7rem;
-    border-radius: 999px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    opacity: 0.88;
-  }
+/* 隐藏滚动条（可选） */
+.photo-strip::-webkit-scrollbar {
+  display: none;
+}
+
+/* 每一张 slide = 占满整个相框宽度 */
+.photo-slide {
+  height: 100%;
+  scroll-snap-align: center;
+  display: flex;
+}
+
+/* 图片占满整个 slide */
+.photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;            /* 裁剪填满，而不是留白 */
+  border-radius: 18px;          /* 稍微小于外框的 24px，看起来有内边距感 */
+}
+
+
+
 
   .typed-cursor {
     display: inline-block;
@@ -621,7 +623,7 @@
       </div>
     </div>
 
-    <div class="overlay-hint">Click the letter to open your birthday card ✉️</div>
+    <div class="overlay-hint">Click the letter ✉️</div>
   </div>
 
   <!-- BACKGROUND BALLOONS -->
@@ -644,38 +646,76 @@
     <!-- CARD WITH MESSAGE + PHOTO -->
     <div class="card" id="card">
       <div>
-        <div class="tagline">
-          <span class="tagline-dot"></span>
-          <span>To: TO_NAME (replace with his name)</span>
-        </div>
         <h2 class="title">Happy Birthday ♡</h2>
         <div class="subtitle">
-          May this year be kind to you, and full of things you secretly wished for.
+          Another year older, another year wiser.
         </div>
 
         <div class="message">
           <span id="typed"></span><span class="typed-cursor" id="cursor"></span>
         </div>
-
-        <div class="sign">
-          From <span>FROM_NAME</span><br />
-          <span id="today"></span>
-        </div>
       </div>
-
       <div class="photo-wrapper">
-        <!-- 换成你们的合照就行 -->
-        <!-- <img src="boyfriend.jpg" alt="My favourite photo of you" class="photo" /> -->
-        <div class="photo-placeholder">
-          You can put your favourite photo of him here. 💗<br /><br />
-          Just replace this box with an <code>&lt;img&gt;</code> tag.
+        <div class="photo-slider">
+          <div class="photo-strip">
+            <!-- Each slide = 1 full-frame photo -->
+            <div class="photo-slide">
+              <img src="Image (3).jpg" alt="Memory 1" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (4).jpg" alt="Memory 2" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (5).jpg" alt="Memory 3" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (6).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (7).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (8).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (9).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (10).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (11).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (12).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (13).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (14).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (15).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (16).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (17).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <div class="photo-slide">
+              <img src="Image (18).jpg" alt="Memory 4" class="photo photo-small" />
+            </div>
+            <!-- add more if you like -->
+            <!-- <div class="photo-slide"><img src="photo4.jpg" alt="Memory 4" class="photo-img" /></div> -->
+          </div>
         </div>
-        <div class="photo-tag">Birthday Boy</div>
       </div>
-    </div>
+
 
     <div class="footer-note">
-      This little page lights up only for you today. ✨
+      This little page lights up only for sam today. ✨
     </div>
   </div>
 
@@ -683,32 +723,41 @@
   <script>
     // ========== Typewriter message ==========
     const fullMessage = `
-Dear TO_NAME 💙
 
-Today is another trip you’ve taken around the sun,
-and I feel so lucky that I get to watch you shine.
+    Dear Sam 🐺
 
-Thank you for working so hard, for being kind,
-and for letting me be part of your world.
+    It’s your special day again, and I just want to say:
+    Thank you for being you and light up my life like a sunshine come through the clouds.
+    Thank you for letting me to participate in your life.
 
-I know there are days when you feel you’re not good enough,
-or not doing enough. But in my eyes you are already so, so wonderful:
-gentle, funny, stubborn in the best way, and always trying.
+    After we met, I learned so much from you, about kindness, and what is love. 
+    I always felt love is more about money, gifts, surprises... but you taught me love is actually about being patient, being present, and being real.
+    Thank you for being my teacher in love. And thanks for loving me back.
 
-In this new year of your life, I wish you:
-· the courage to chase the things you love
-· soft landings whenever you feel tired
-· people and moments that make you feel safe and seen
+    I'm sorry for the times I made you feel sad or hurt.
+    I never meant to, and I will keep trying to be better for you.
+    Sometimes I may just don't know how to show my feeling in the right way for you, you taught me to be more open and honest, and I am learning.
+    Just bit of slow lol.
 
-For all the birthdays still ahead,
-I want to be there counting 3, 2, 1 with you,
-and making new wishes together.
+    Look back at all the things we have done this year, we are so lucky to have each other and both survived in a miracle way.
+    We were in student center, science library, gardern hall, camden market, winter wonderland, wihtechaple, clapham north, kew garden, brunswick square, ucl gym, and so many more places together.
+    We cooked together, we laughed together, we cried together.
+    
+    We supported each other, we grew together.
+    Although sometimes I'm a bit immature and childish, you always patiently hold my hand and walk with me through all the ups and downs.
+    You are my hero, my rock, my sunshine.
+    I hope I can be yours too.
 
-Happy birthday, my favourite person
-and my little hero. 🎂
+    In this new year of your life, I wish you:
+    Keep healthy and happy,
+    be brave to chase your dreams,
+    have faith in yourself,
+    and never forget to love yourself as much as I love you.
 
-FROM_NAME
-`.trim();
+    Happy birthday my dearest Sam.
+    With all my love,
+    Peipei🐇
+    `.trim();
 
     const typedSpan = document.getElementById("typed");
     const cursorSpan = document.getElementById("cursor");
@@ -781,13 +830,7 @@ FROM_NAME
       }
     }
 
-    // 日期
-    const todaySpan = document.getElementById("today");
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    todaySpan.textContent = year + "-" + month + "-" + day;
+
 
     // 🎂 初始化 3D 蛋糕（全局 THREE + THREE.FBXLoader）
     function init3DCake() {
@@ -913,6 +956,24 @@ FROM_NAME
         typeNextChar();
       }, 1100);
     });
+
+
+    // Make photo slider usable with mouse wheel on desktop
+const photoStrip = document.querySelector(".photo-strip");
+if (photoStrip) {
+  photoStrip.addEventListener(
+    "wheel",
+    (e) => {
+      // 如果是垂直滚动，就转成横向滚动
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault(); // 禁止默认的整页上下滚动
+        photoStrip.scrollLeft += e.deltaY; // 用滚轮垂直量来控制横向滚动
+      }
+    },
+    { passive: false }
+  );
+}
+
   </script>
 </body>
 </html>
