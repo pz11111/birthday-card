@@ -332,76 +332,79 @@
     font-weight: 600;
     color: #c1557f;
   }
-/* 外层容器：占满这一列，但里面的 frame 居中 */
 .photo-wrapper {
   position: relative;
   width: 100%;
-  max-width: 100%;
+  max-width: 320px;
   margin: 1rem auto 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;     /* 👉 让相框和文字都居中 */
+  border: #ffffffce 6px solid; /* 给相框一个颜色 */             /* 当白色边框用 */
+  background: #fff;
+  box-shadow: #b25b8133 0 18px 40px;
+  border-radius: 24px;
 }
 
-/* 相框本体：宽度跟着列变，高度按比例算，并限制最大宽度，防止巨大无比 */
 .photo-slider {
-  position: relative;
   width: 100%;
-  max-width: 260px;        /* 👉 最大就这么宽，电脑上不会再变得很大 */
+  /* ❌ 不要固定高度，否则图片会被强行撑大
+  height: 260px;
+  max-height: 60vh;
+  */
 
-  aspect-ratio: 4 / 5;     /* 👉 竖版比例，跟常见照片差不多 */
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 18px 45px rgba(252, 170, 170, 0.466);
   border: 6px solid #fff;
-  background: #ffffff;   /* 你的原底色 */
+  background: #dbb0b07c;  /* 你的底色 */
 }
 
-/* ✅ 不再写死高度，也不需要媒体查询那个 height 320px 了 */
 @media (min-width: 720px) {
   .photo-slider {
-    /* 保留空的就行，不要再设 height */
+    /* height: 320px;  删掉这行 */
   }
 }
 
-/* 内部滑动区域：绝对铺满整个 frame，没有空隙 */
+/* 1. 保证每一页照片之间没有缝隙 */
 .photo-strip {
-  align-self: center;
-  align-items: center;
-  align-content: center;
-  position: absolute;
-  inset: 0;                /* top/right/bottom/left 全 0 */
   width: 100%;
-  height: 100%;
-
+  /* height: 100%;  ❌ 删掉 */
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
+
+  gap: 0;        /* 照片之间不要间距 */
+  padding: 0;    /* 不要内边距 */
 }
 
+/* Safari 也一起支持 */
 .photo-strip::-webkit-scrollbar {
   display: none;
 }
 
-/* 每张图一页，宽 = 整个 frame 宽，高 = frame 高 */
+/* 每张图 = 占满整页，不留边 */
 .photo-slide {
   flex: 0 0 100%;
-  height: 100%;
+  /* height: 100%;  ❌ 删掉 */
   scroll-snap-align: center;
   display: flex;
+  margin: 0;     /* 避免 slide 之间再生缝 */
 }
 
-/* 图片填满整页，跟着 frame 一起缩放，没有黑边 */
+/* 2. 图片铺满当前这页 */
+.photo-slide img,
 .photo-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;       /* 超出部分裁掉，不变形 */
-  display: block;
-  border-radius: 18px;     /* 比相框小一点，留一点“内边距”感 */
+  height: auto;          /* ✅ 按原始比例算高度，不乱放大 */
+  object-fit: cover;   /* ✅ 显示完整图片，不裁剪；你想填满可以改回 cover */
+  display: block;        /* 去掉行内缝隙 */
+  border-radius: 18px;   /* 留一点内圆角，如果你想完全无白边可以设 0 */
 }
 
+/* 3. 相框本身不要挤出空隙 */
+.photo-slider {
+  padding: 0;                /* 🚫 不能 padding，不然边缘会露底色 */
+  background: #000;          /* 或者改成跟图片边缘接近的颜色 */
+}
 
 
 
@@ -574,7 +577,7 @@
     }
 
     .hero {
-      min-height: 48vh;
+      min-height: 40vh;
       gap: 1rem;
     }
 
@@ -776,7 +779,7 @@
 
     Happy birthday my dearest Sam.
     With all my love,
-    Peipei🐇
+    Peipei 🐰
     `.trim();
 
     const typedSpan = document.getElementById("typed");
